@@ -4,13 +4,21 @@ import {Chat} from "./components/Chat";
 import 'bootstrap/dist/css/bootstrap.css';
 import './AkadChat.css';
 
+function Logout(props) {
+   return (
+      <a href="" onClick={props.onLogout}>loggout {props.name}</a>
+   )
+}
+
+const loggedOutState = {
+   isLoggedIn: false,
+   loggedInAs: {}
+};
+
 export class AkadChat extends React.Component {
    constructor(props) {
       super(props);
-      this.state = {
-         isLoggedIn: false,
-         loggedInAs: {}
-      };
+      this.state = loggedOutState;
       this.login = this.login.bind(this);
    }
 
@@ -22,13 +30,17 @@ export class AkadChat extends React.Component {
       });
    }
 
+   logout() {
+      this.setState(loggedOutState);
+   }
+
    render() {
       return (
          <div className="container">
             <div className="row">
                <div className="col-md-9"><h2>Der Akad Super Chat</h2></div>
                <div className="col-md-3 loginout">
-                  {this.state.isLoggedIn ? "angemeldet als " + this.state.loggedInAs.name : "unangemeldet"}
+                  {this.state.isLoggedIn ? <Logout name={this.state.loggedInAs.name} onLogout={this.logout} /> : "unangemeldet"}
                </div>
             </div>
             <div className="row">
