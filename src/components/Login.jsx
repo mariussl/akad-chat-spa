@@ -1,6 +1,6 @@
 import React from "react";
 import RoomSelect from "./RoomSelect";
-import CreatePane from "./CreatePane";
+import CreateUser from "./CreateUser";
 import {apiUserUrl} from "../constants";
 
 export class Login extends React.Component {
@@ -8,19 +8,18 @@ export class Login extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
-         displayCreatePane: false,
+         displayCreateUser: false,
          loginUsername : ""
       };
-
-      // This binding is necessary to make `this` work in the callback
-      this.toggleDisplayCreatePane = this.toggleDisplayCreatePane.bind(this);
+      this.toggleDisplayCreateUser = this.toggleDisplayCreateUser.bind(this);
       this.login = this.login.bind(this);
+      this.loginByFormInput = this.loginByFormInput.bind(this);
       this.loginUsernameChange = this.loginUsernameChange.bind(this);
    }
 
-   toggleDisplayCreatePane() {
+   toggleDisplayCreateUser() {
       this.setState((state) => ({
-         displayCreatePane: !state.displayCreatePane
+         displayCreateUser: !state.displayCreateUser
       }));
    }
 
@@ -28,22 +27,26 @@ export class Login extends React.Component {
       this.setState({loginUsername: event.target.value});
    }
 
-   login(event) {
-      fetch(apiUserUrl + "?name=" + this.state.loginUsername)
+   loginByFormInput(event) {
+      this.login(this.state.loginUsername);
+      event.preventDefault();
+   }
+
+   login(name) {
+      fetch(apiUserUrl + "?name=" + name)
          .then(res => res.json())
          .then((data) => {
-            if ((parseInt(data.type, 10) === 1) && (data.payload.name === this.state.loginUsername)) {
+            if ((parseInt(data.type, 10) === 1) && (data.payload.name === name)) {
                this.props.onLogin(data.payload);
             }
          })
          .catch(console.log)
-      event.preventDefault();
    }
 
    render() {
       return (
          <div>
-            <form className="row" onSubmit={this.login}>
+            <form className="row" onSubmit={this.loginByUsername}>
                <div className="col-md-3 form-group">
                   <label htmlFor="existing-username">Username</label>
                   <input type="text" pattern="[A-Za-z0-9]{6,15}" className="form-control" value={this.state.loginUsername}
@@ -64,14 +67,15 @@ export class Login extends React.Component {
             <div className="row">
                <div className="col-md-9">
                   <p>
-                     <button type="button" className="btn btn-info" role="button" aria-expanded="false" onClick={this.toggleDisplayCreatePane}>
+                     <button type="button" className="btn btn-info" role="button" aria-expanded="false"
+                             onClick={this.toggleDisplayCreateUser}>
                         Das erste Mal hier?
                      </button>
                   </p>
                </div>
                <div className="col-md-3"/>
             </div>
-            <CreatePane toggled={this.state.displayCreatePane}/>
+            {this.state.displayCreateUser && <CreateUser onCreate={this.login}/>}
          </div>
       )
    }
