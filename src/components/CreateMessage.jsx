@@ -35,7 +35,9 @@ export class CreateMessage extends React.Component {
             .then(res => res.json())
             .then((data) => {
                if (parseInt(data.type, 10) === 1) {
-                  console.log("success");
+                  this.setState({
+                     newMessageText: ""
+                  })
                } else {
                   console.log("error");
                }
