@@ -3,6 +3,7 @@ import {Login} from "./components/Login";
 import {Chat} from "./components/Chat";
 import 'bootstrap/dist/css/bootstrap.css';
 import './AkadChat.css';
+import {apiRoomUrl} from "./constants";
 
 function Logout(props) {
    return (
@@ -12,7 +13,8 @@ function Logout(props) {
 
 const loggedOutState = {
    isLoggedIn: false,
-   loggedInAs: {}
+   loggedInAs: {},
+   roomname: "",
 };
 
 export class AkadChat extends React.Component {
@@ -20,18 +22,25 @@ export class AkadChat extends React.Component {
       super(props);
       this.state = loggedOutState;
       this.login = this.login.bind(this);
+      this.changeRoomname = this.changeRoomname.bind(this);
    }
 
-   login(user) {
-      console.log(user);
+   login(user, roomname) {
       this.setState({
          isLoggedIn: true,
-         loggedInAs: user
+         loggedInAs: user,
+         roomname: roomname
       });
    }
 
    logout() {
       this.setState(loggedOutState);
+   }
+
+   changeRoomname(event) {
+      this.setState({
+         roomname: event.target.value
+      });
    }
 
    render() {
@@ -46,7 +55,9 @@ export class AkadChat extends React.Component {
             <div className="row">
                <div className="col-md-12"><h4>Dies ist ein einfacher Chat basierend auf React, PHP und Postgresql</h4></div>
             </div>
-            {this.state.isLoggedIn ? <Chat user={this.loggedInAs} /> : <Login onLogin={this.login}/>}
+            {this.state.isLoggedIn ?
+               <Chat roomname={this.state.roomname} user={this.state.loggedInAs} /> :
+               <Login onChangeRoomname={this.changeRoomname} roomname={this.state.roomname} onLogin={this.login} />}
          </div>
       );
    }

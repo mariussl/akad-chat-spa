@@ -9,7 +9,7 @@ export class Login extends React.Component {
       super(props);
       this.state = {
          displayCreateUser: false,
-         loginUsername : ""
+         loginUsername : "",
       };
       this.toggleDisplayCreateUser = this.toggleDisplayCreateUser.bind(this);
       this.login = this.login.bind(this);
@@ -56,7 +56,7 @@ export class Login extends React.Component {
                </div>
                <div className="col-md-3 form-group">
                   <label htmlFor="room">Chat-Raum</label>
-                  <RoomSelect />
+                  <RoomSelect onChange={this.props.onChangeRoomname} selectedRoomname={this.props.roomname} />
                   <small id="room-help" className="form-text text-muted">Der Raum in dem Sie chatten wollen.</small>
                </div>
                <div className="col-md-3 form-group padding-btn">

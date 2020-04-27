@@ -1,7 +1,9 @@
 import React from "react";
 import RoomSelect from "./RoomSelect";
+import MessageList from "./MessageList";
 
 export class Chat extends React.Component {
+
    render() {
       return (
          <div>
@@ -14,14 +16,7 @@ export class Chat extends React.Component {
             </div>
             <div className="row">
                <div className="col-md-12">
-                  <div className="chat-message-pane">
-                     <div className="message user1">Hallo wie gehts dir?</div>
-                     <div className="message user2">Gut, danke - ist schönes Wetter heute oder?</div>
-                     <div className="message user1">Ja genau. Warst du schon einkaufen?</div>
-                     <div className="message user2">Ja bei uns gibt es Pizza :)</div>
-                     <div className="message user2">Oh jetzt fällt mir ein ich hab den Käse vergessen</div>
-                     <div className="message user1">Dann aber schnell noch zum Supermarkt</div>
-                  </div>
+                  <MessageList />
                </div>
             </div>
             <form className="row">
