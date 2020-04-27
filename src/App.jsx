@@ -1,4 +1,5 @@
 import React from 'react';
+import RoomSelect from './components/RoomSelect';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
@@ -21,10 +22,7 @@ function App() {
          </div>
          <div className="col-md-3 form-group">
            <label htmlFor="room">Chat-Raum</label>
-           <select className="form-control" name="room" id="room" aria-describedby="room-help">
-             <option selected>Wohnzimmer</option>
-             <option>Allgemein</option>
-           </select>
+           <RoomSelect />
            <small id="room-help" className="form-text text-muted">Der Raum in dem Sie chatten wollen.</small>
          </div>
          <div className="col-md-3 form-group padding-btn">
