@@ -1,7 +1,25 @@
 import React from "react";
 import RoomSelect from "./RoomSelect";
+import CreatePane from "./CreatePane";
 
 export class Login extends React.Component {
+
+   constructor(props) {
+      super(props);
+      this.state = {
+         displayCreatePane: false
+      };
+
+      // This binding is necessary to make `this` work in the callback
+      this.toggleDisplayCreatePane = this.toggleDisplayCreatePane.bind(this);
+   }
+
+   toggleDisplayCreatePane() {
+      this.setState((state) => ({
+         displayCreatePane: !state.displayCreatePane
+      }));
+   }
+
    render() {
       return (
          <div>
@@ -20,41 +38,19 @@ export class Login extends React.Component {
                <div className="col-md-3 form-group padding-btn">
                   <button type="submit" className="btn btn-primary">Login</button>
                </div>
-               <div className="col-md-3"></div>
+               <div className="col-md-3"/>
             </form>
             <div className="row">
                <div className="col-md-9">
                   <p>
-                     <a className="btn btn-info" data-toggle="collapse" href="#create-user"
-                        role="button" aria-expanded="false" aria-controls="create-user">
+                     <button className="btn btn-info" role="button" aria-expanded="false" onClick={this.toggleDisplayCreatePane}>
                         Das erste Mal hier?
-                     </a>
+                     </button>
                   </p>
                </div>
-               <div className="col-md-3"></div>
+               <div className="col-md-3"/>
             </div>
-            <div className="collapse" id="create-user">
-               <form className="row">
-                  <div className="col-md-3 form-group">
-                     <label htmlFor="new-username">Username</label>
-                     <input type="text" pattern="[A-Za-z0-9]{15}" className="form-control"
-                            name="new-username" id="new-username" aria-describedby="new-username-help" />
-                     <small id="new-username-help" className="form-text text-muted">Der Username muss alphanumerisch
-                        sein.</small>
-                  </div>
-                  <div className="col-md-3 form-group">
-                     <label htmlFor="color">Farbe</label>
-                     <input type="color" className="form-control"
-                            name="color" id="color" aria-describedby="color-help" />
-                     <small id="color-help" className="form-text text-muted">Die Farbe in der Ihre Nachrichten
-                        erscheinen.</small>
-                  </div>
-                  <div className="col-md-3 form-group padding-btn">
-                     <button type="submit" className="btn btn-primary">Registrieren</button>
-                  </div>
-                  <div className="col-md-3"></div>
-               </form>
-            </div>
+            <CreatePane toggled={this.state.displayCreatePane}/>
          </div>
       )
    }
