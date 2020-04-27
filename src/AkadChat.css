@@ -34,3 +34,7 @@ body {
 .room-select {
   margin-bottom: 8px;
 }
+
+.chat-message-pane .message span {
+  margin-right: 5px;
+}

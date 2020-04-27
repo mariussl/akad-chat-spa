@@ -2,13 +2,15 @@ import React from "react";
 import RoomSelect from "./RoomSelect";
 import CreateMessage from "./CreateMessage";
 import {apiMessageUrl} from "../constants";
+import {apiUserUrl} from "../constants";
 
 export class Chat extends React.Component {
 
    constructor(props) {
       super(props);
       this.state = {
-         messageList: []
+         messageList: [],
+         userColorMap: {}
       };
       this.load = this.load.bind(this);
    }
@@ -28,6 +30,18 @@ export class Chat extends React.Component {
 
    componentDidMount() {
       this.load();
+      fetch(apiUserUrl)
+         .then(res => res.json())
+         .then((data) => {
+            let userColorMap = {};
+            data.payload.forEach(user => {
+               userColorMap[user.name] = "#" + user.color;
+            });
+            this.setState({
+               userColorMap: userColorMap
+            })
+         })
+         .catch(console.log)
    }
 
    componentWillUnmount() {
@@ -47,7 +61,15 @@ export class Chat extends React.Component {
             <div className="row">
                <div className="col-md-12">
                   <div className="chat-message-pane">
-                     {this.state.messageList.map(message => <div className="message">{message.username}: {message.text}</div>)}
+                     {this.state.messageList.map(
+                        message =>
+                           <div className="message">
+                              <span style={{color: this.state.userColorMap[message.username]}}>
+                                 {message.username}:
+                              </span>
+                              {message.text}
+                           </div>
+                     )}
                   </div>
                </div>
             </div>
