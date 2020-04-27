@@ -46,7 +46,7 @@ export class Login extends React.Component {
    render() {
       return (
          <div>
-            <form className="row" onSubmit={this.loginByUsername}>
+            <form className="row" onSubmit={this.loginByFormInput}>
                <div className="col-md-3 form-group">
                   <label htmlFor="existing-username">Username</label>
                   <input type="text" pattern="[A-Za-z0-9]{6,15}" className="form-control" value={this.state.loginUsername}
