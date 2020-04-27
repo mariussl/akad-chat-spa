@@ -11,3 +11,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media (min-width: 768px) {
+  .padding-btn {
+    padding-top: 32px;
+  }
+}
+
+.chat-message-pane {
+  overflow-y: scroll;
+  border: 1px solid #999999;
+  height: 500px;
+  padding: 5px 5px 0 5px;
+}
+
+.chat-message-pane .message {
+  margin: 1px 0;
+}
+
+.user1 {
+  color: blue;
+}
+
+.user2 {
+  color: green;
+}
+
+.loginout {
+  text-align: right;
+}
+
+body {
+  padding-top: 10px;
+}
+
+.room-select {
+  margin-bottom: 8px;
+}
