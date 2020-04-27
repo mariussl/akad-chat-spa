@@ -1,14 +1,17 @@
 import React from "react";
-import apiUrl from "../constants";
+import {apiRoomUrl} from "../constants";
 
 class RoomSelect extends React.Component {
-   state = {
-      roomList: []
+
+   constructor(props) {
+      super(props);
+      this.state = {
+         roomList: []
+      }
    }
 
    componentDidMount() {
-      console.log("didmount");
-      fetch(apiUrl + "/room.php")
+      fetch(apiRoomUrl)
          .then(res => res.json())
          .then((data) => {
             this.setState({ roomList: data.payload })
