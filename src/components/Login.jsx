@@ -32,9 +32,8 @@ export class Login extends React.Component {
       fetch(apiUserUrl + "?name=" + this.state.loginUsername)
          .then(res => res.json())
          .then((data) => {
-            console.log(data);
             if ((parseInt(data.type, 10) === 1) && (data.payload.name === this.state.loginUsername)) {
-               console.log("login");
+               this.props.onLogin(data.payload);
             }
          })
          .catch(console.log)

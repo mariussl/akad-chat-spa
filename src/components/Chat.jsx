@@ -1,4 +1,5 @@
 import React from "react";
+import RoomSelect from "./RoomSelect";
 
 export class Chat extends React.Component {
    render() {
@@ -7,10 +8,7 @@ export class Chat extends React.Component {
             <div className="row room-select">
                <div className="col-md-9">
                   <label htmlFor="room">Chat-Raum</label>
-                  <select className="form-control" name="room" id="room" aria-describedby="room-help">
-                     <option selected>Wohnzimmer</option>
-                     <option>Allgemein</option>
-                  </select>
+                  <RoomSelect />
                </div>
                <div className="col-md-3"></div>
             </div>
