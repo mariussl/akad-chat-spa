@@ -18,12 +18,20 @@ export class Chat extends React.Component {
          .then(res => res.json())
          .then((data) => {
             this.setState({ messageList: data.payload })
+            this.timerID = setTimeout(
+               () => this.load(),
+               1000
+            );
          })
          .catch(console.log)
    }
 
    componentDidMount() {
       this.load();
+   }
+
+   componentWillUnmount() {
+      clearTimeout(this.timerID);
    }
 
    render() {
@@ -43,8 +51,7 @@ export class Chat extends React.Component {
                   </div>
                </div>
             </div>
-            <CreateMessage roomname={this.props.roomname} username={this.props.username}
-               onCreate={this.load} />
+            <CreateMessage roomname={this.props.roomname} username={this.props.username} />
          </div>
       )
    }
