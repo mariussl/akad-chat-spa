@@ -10,13 +10,13 @@ export class Chat extends React.Component {
             <div className="row room-select">
                <div className="col-md-9">
                   <label htmlFor="room">Chat-Raum</label>
-                  <RoomSelect />
+                  <RoomSelect onChange={this.props.onChangeRoomname} selectedRoomname={this.props.roomname} />
                </div>
                <div className="col-md-3"></div>
             </div>
             <div className="row">
                <div className="col-md-12">
-                  <MessageList />
+                  <MessageList roomname={this.props.roomname}/>
                </div>
             </div>
             <form className="row">

@@ -25,11 +25,10 @@ export class AkadChat extends React.Component {
       this.changeRoomname = this.changeRoomname.bind(this);
    }
 
-   login(user, roomname) {
+   login(user) {
       this.setState({
          isLoggedIn: true,
-         loggedInAs: user,
-         roomname: roomname
+         loggedInAs: user
       });
    }
 
@@ -56,7 +55,7 @@ export class AkadChat extends React.Component {
                <div className="col-md-12"><h4>Dies ist ein einfacher Chat basierend auf React, PHP und Postgresql</h4></div>
             </div>
             {this.state.isLoggedIn ?
-               <Chat roomname={this.state.roomname} user={this.state.loggedInAs} /> :
+               <Chat onChangeRoomname={this.changeRoomname} roomname={this.state.roomname} user={this.state.loggedInAs} /> :
                <Login onChangeRoomname={this.changeRoomname} roomname={this.state.roomname} onLogin={this.login} />}
          </div>
       );
