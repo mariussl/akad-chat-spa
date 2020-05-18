@@ -1,14 +1,9 @@
 import React from 'react';
 import {Login} from "./components/Login";
+import {Logout} from "./components/Logout";
 import {Chat} from "./components/Chat";
 import 'bootstrap/dist/css/bootstrap.css';
 import './AkadChat.css';
-
-function Logout(props) {
-   return (
-      <a href="" onClick={props.onLogout}>loggout {props.name}</a>
-   )
-}
 
 const loggedOutState = {
    isLoggedIn: false,
